@@ -21,6 +21,38 @@ class WPDT_Utility
 {
 
 	/**
+	 * A simple mobile detection script
+	 *
+	 * @returns string	the name of the mobile agent
+	 **/
+	public function is_mobile () {
+		$user_agent = $_SERVER['HTTP_USER_AGENT'];
+		$mobile_agents = array(
+			'iPhone',
+			'iPod',
+			'incognito',
+			'webmate',
+			'Android',
+			'BlackBerry',
+			'webOS',
+			's8000',
+			'bada',
+			'IEMobile/7.0',
+			'Googlebot-Mobile',
+			'AdsBot-Google',
+		);
+		
+		foreach( $mobile_agents as $agent ) {
+			$mobile_agent = preg_quote( $agent );
+			if ( preg_match( "#$mobile_agent#i", $user_agent ) ) {
+				return $agent;
+			} else {
+				return false;
+			}
+		}
+	}
+
+	/**
 	 * Collects a set of posts, pages, media items or custom content items and merges the metadata into an array
 	 *
 	 * @author Christopher Frazier
