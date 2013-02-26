@@ -185,8 +185,15 @@ class WPDT_Options
 		if (isset($settings[$args['label_for']])) {
 			echo '<img src="' . esc_attr( $settings[$args['label_for']] ) . '" /><br />';
 		}
+		if (!isset($args['uploader_title'])) {
+			$args['uploader_title'] = 'Insert Media';
+		}
+		if (!isset($args['uploader_button_text'])) {
+			$args['uploader_button_text'] = 'Select';
+		}
+		
 		echo '<input type="text" class="wpdt-media-upload regular-text" id="' . $option_id . '" name="' . $option_name . '" value="' . esc_attr( $settings[$args['label_for']] ) . '" />';
-		echo '<input id="' . $option_id . '-upload" class="wpdt-media-upload-button button" type="button" value="Upload Image" />';
+		echo '<input id="' . $option_id . '-upload" data-uploader-title="' . $args['uploader_title'] . '" data-uploader-button-text="' . $args['uploader_button_text'] . '" class="wpdt-media-upload-button button" type="button" value="Upload Image" />';
 	
 		if (isset($args['description'])) {
 			echo '<br />' . $args['description'];
